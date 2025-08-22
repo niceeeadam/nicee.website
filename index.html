@@ -29,13 +29,18 @@
             --primary-dark: #4f46e5;
             --secondary: #8b5cf6;
             --accent: #ec4899;
-            --text-dark: #0f172a;
-            --text-light: #64748b;
-            --bg-light: #f8fafc;
-            --bg-white: #ffffff;
-            --border: #e2e8f0;
-            --shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
-            --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --text-primary: #ffffff;
+            --text-secondary: #e4e4e7;
+            --text-muted: #a1a1aa;
+            --text-light: #d4d4d8;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #171717;
+            --border: #27272a;
+            --border-light: #3f3f46;
+            --shadow: 0 10px 25px -5px rgb(0 0 0 / 0.4), 0 4px 6px -2px rgb(0 0 0 / 0.2);
+            --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.6);
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
         }
 
@@ -48,7 +53,8 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
+            color: var(--text-primary);
+            background: var(--bg-primary);
             overflow-x: hidden;
         }
 
@@ -63,7 +69,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
@@ -86,6 +92,7 @@
             gap: 10px;
             font-weight: 600;
             font-size: 1.2rem;
+            color: var(--text-primary);
         }
 
         .nav-logo {
@@ -99,7 +106,7 @@
 
         .nav-link {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--text-secondary);
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
@@ -136,7 +143,7 @@
         .nav-toggle span {
             width: 25px;
             height: 3px;
-            background: var(--text-dark);
+            background: var(--text-primary);
             margin: 3px 0;
             transition: 0.3s;
             border-radius: 2px;
@@ -148,7 +155,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            background: var(--bg-white);
+            background: var(--bg-primary);
             overflow: hidden;
         }
 
@@ -169,6 +176,7 @@
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
         .gradient-text {
@@ -180,7 +188,7 @@
 
         .hero-subtitle {
             font-size: 1.5rem;
-            color: var(--text-light);
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             font-weight: 500;
         }
@@ -225,8 +233,8 @@
         }
 
         .btn-secondary {
-            background: var(--bg-white);
-            color: var(--text-dark);
+            background: var(--bg-card);
+            color: var(--text-primary);
             border: 2px solid var(--border);
         }
 
@@ -249,12 +257,13 @@
         .hero-card {
             width: 300px;
             height: 400px;
-            background: var(--bg-white);
+            background: var(--bg-card);
             border-radius: 20px;
             box-shadow: var(--shadow-lg);
             overflow: hidden;
             transform: rotate(5deg);
             transition: transform 0.3s ease;
+            border: 1px solid var(--border);
         }
 
         .hero-card:hover {
@@ -272,7 +281,7 @@
 
         .card-line {
             height: 12px;
-            background: var(--bg-light);
+            background: var(--border-light);
             border-radius: 6px;
             margin-bottom: 1rem;
         }
@@ -297,7 +306,7 @@
             right: 0;
             width: 50%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(236, 72, 153, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%);
         }
 
         .hero-shapes {
@@ -361,6 +370,7 @@
             font-weight: 700;
             margin-bottom: 1rem;
             position: relative;
+            color: var(--text-primary);
         }
 
         .section-description {
@@ -373,7 +383,7 @@
         /* About Section */
         .about {
             padding: 6rem 0;
-            background: var(--bg-light);
+            background: var(--bg-secondary);
         }
 
         .about-content {
@@ -400,6 +410,7 @@
         .skill-category h4 {
             margin-bottom: 0.5rem;
             font-weight: 600;
+            color: var(--text-primary);
         }
 
         .skill-tags {
@@ -409,12 +420,12 @@
         }
 
         .skill-tag {
-            background: var(--bg-white);
+            background: var(--bg-card);
             padding: 0.5rem 1rem;
             border-radius: 8px;
             font-size: 0.9rem;
             border: 1px solid var(--border);
-            color: var(--text-dark);
+            color: var(--text-secondary);
         }
 
         .about-visual {
@@ -423,12 +434,13 @@
         }
 
         .profile-card {
-            background: var(--bg-white);
+            background: var(--bg-card);
             border-radius: 20px;
             padding: 2rem;
             box-shadow: var(--shadow);
             text-align: center;
             max-width: 300px;
+            border: 1px solid var(--border);
         }
 
         .profile-image {
@@ -465,13 +477,13 @@
 
         .stat-label {
             font-size: 0.9rem;
-            color: var(--text-light);
+            color: var(--text-muted);
         }
 
         /* Projects Section */
         .projects {
             padding: 6rem 0;
-            background: var(--bg-white);
+            background: var(--bg-primary);
         }
 
         .projects-grid {
@@ -481,11 +493,12 @@
         }
 
         .project-card {
-            background: var(--bg-white);
+            background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
         }
 
         .project-card:hover {
@@ -545,7 +558,7 @@
 
         .project-link:hover {
             background: white;
-            color: var(--text-dark);
+            color: var(--bg-primary);
         }
 
         .project-content {
@@ -556,6 +569,7 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .project-content p {
@@ -582,7 +596,7 @@
         /* Video Edits Section */
         .edits {
             padding: 6rem 0;
-            background: var(--bg-light);
+            background: var(--bg-secondary);
         }
 
         .edits-grid {
@@ -592,11 +606,12 @@
         }
 
         .edit-card {
-            background: var(--bg-white);
+            background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
+            border: 1px solid var(--border);
         }
 
         .edit-card:hover {
@@ -647,6 +662,7 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .edit-content p {
@@ -662,11 +678,11 @@
         }
 
         .edit-stats .stat {
-            background: var(--bg-light);
+            background: var(--bg-tertiary);
             padding: 0.3rem 0.8rem;
             border-radius: 6px;
             font-size: 0.9rem;
-            color: var(--text-light);
+            color: var(--text-muted);
         }
 
         /* Video Modal Styles */
@@ -736,7 +752,7 @@
         /* Design Section */
         .design {
             padding: 6rem 0;
-            background: var(--bg-white);
+            background: var(--bg-primary);
         }
 
         .design-gallery {
@@ -752,6 +768,7 @@
             overflow: hidden;
             cursor: pointer;
             group: hover;
+            border: 1px solid var(--border);
         }
 
         .design-item img {
@@ -797,7 +814,7 @@
         /* Contact Section */
         .contact {
             padding: 6rem 0;
-            background: var(--bg-light);
+            background: var(--bg-secondary);
         }
 
         .contact-content {
@@ -831,6 +848,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.2rem;
+            color: var(--text-primary);
         }
 
         .contact-item p {
@@ -838,10 +856,11 @@
         }
 
         .contact-form {
-            background: var(--bg-white);
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 16px;
             box-shadow: var(--shadow);
+            border: 1px solid var(--border);
         }
 
         .form-group {
@@ -857,7 +876,8 @@
             font-family: inherit;
             font-size: 1rem;
             transition: border-color 0.3s ease;
-            background: var(--bg-white);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
         }
 
         .form-group input:focus,
@@ -873,8 +893,8 @@
 
         /* Footer */
         .footer {
-            background: var(--text-dark);
-            color: white;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
             padding: 3rem 0 2rem;
         }
 
@@ -891,6 +911,7 @@
             font-weight: 600;
             font-size: 1.2rem;
             margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
         .footer-logo {
@@ -898,7 +919,7 @@
         }
 
         .footer-text {
-            color: #94a3b8;
+            color: var(--text-muted);
             margin-bottom: 2rem;
         }
 
@@ -907,13 +928,13 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 2rem;
-            border-top: 1px solid #334155;
+            border-top: 1px solid var(--border);
             flex-wrap: wrap;
             gap: 1rem;
         }
 
         .footer-bottom p {
-            color: #94a3b8;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
@@ -923,7 +944,7 @@
         }
 
         .social-link {
-            color: #94a3b8;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s ease;
@@ -1067,7 +1088,7 @@
                 <h1 class="hero-title">Hi, I'm <span class="gradient-text">Adam.</span></h1>
                 <p class="hero-subtitle">Game Developer & Content Creator</p>
                 <p class="hero-description">
-                    I create games on the Roblox platform.
+                    Game Developer on the Roblox platform and Content Creator on the TikTok platform creating edits of various fictional shows, primarily on K-Drama.
                 </p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">My work</a>
@@ -1336,9 +1357,9 @@
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('.nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
             } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
             }
         });
 
