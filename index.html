@@ -669,6 +669,70 @@
             color: var(--text-light);
         }
 
+        /* Video Modal Styles */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            width: 800px;
+            aspect-ratio: 16/9;
+        }
+
+        .modal-video {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
         /* Design Section */
         .design {
             padding: 6rem 0;
@@ -917,6 +981,21 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 80%;
+            }
+
+            .modal-close {
+                top: -40px;
+                font-size: 1.5rem;
+            }
+
+            .modal-title {
+                bottom: -40px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1150,16 +1229,16 @@
             <div class="section-header">
                 <h2 class="section-title">Edits</h2>
                 <p class="section-description">
-                    Edits of characters from fictional series, showcasing my editing abilites.
+                    Edits of characters from fictional series, showcasing my editing abilities.
                 </p>
             </div>
             <div class="edits-grid">
                 <div class="edit-card">
-                    <div class="edit-video">
+                    <div class="edit-video" onclick="openVideoModal('https://cdn.discordapp.com/attachments/1204543017382445076/1407921355646701628/ahn_suho2.mp4?ex=68a88531&is=68a733b1&hm=02b72f14abcab61b7279e8627086bc1c7005e48e829c1bd87dcbf2546081dfa3&', 'Ahn Suho Edit')">
                         <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&h=400&fit=crop" alt="Ahn Suho" />
                         <div class="play-button">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="https://cdn.discordapp.com/attachments/1204543017382445076/1407921355646701628/ahn_suho2.mp4?ex=68a88531&is=68a733b1&hm=02b72f14abcab61b7279e8627086bc1c7005e48e829c1bd87dcbf2546081dfa3&"/>
+                                <path d="M8 5v14l11-7z"/>
                             </svg>
                         </div>
                     </div>
@@ -1173,6 +1252,15 @@
             </div>
         </div>
     </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+            <iframe id="modalVideo" class="modal-video" src="" frameborder="0" allowfullscreen></iframe>
+            <div id="modalTitle" class="modal-title"></div>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -1280,6 +1368,45 @@
                 nav.style.background = 'rgba(255, 255, 255, 0.98)';
             } else {
                 nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Video Modal Functions
+        function openVideoModal(videoSrc, title) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            const modalTitle = document.getElementById('modalTitle');
+            
+            // Set video source and title
+            video.src = videoSrc + '?autoplay=1';
+            modalTitle.textContent = title;
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            // Hide modal
+            modal.classList.remove('active');
+            video.src = ''; // Stop video
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal when clicking outside content
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
             }
         });
 
