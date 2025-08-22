@@ -228,7 +228,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.about-card, .feature-card, .contact-item');
+    const animateElements = document.querySelectorAll('.project-card, .edit-card, .design-item, .contact-item, .profile-card');
     
     animateElements.forEach(el => {
         el.style.opacity = '0';
@@ -238,10 +238,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add some interactive hover effects
+// Add portfolio-specific hover effects
 document.addEventListener('DOMContentLoaded', () => {
-    // Add tilt effect to cards
-    const cards = document.querySelectorAll('.about-card, .feature-card, .hero-card');
+    // Video play button interactions
+    const videoCards = document.querySelectorAll('.edit-video');
+    videoCards.forEach(video => {
+        video.addEventListener('click', () => {
+            const title = video.closest('.edit-card').querySelector('h3').textContent;
+            showNotification(`"${title}" video would play here. Link to your actual video!`, 'info');
+        });
+    });
+
+    // Design gallery lightbox effect
+    const designItems = document.querySelectorAll('.design-item');
+    designItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const title = item.querySelector('h4').textContent;
+            showNotification(`"${title}" - Opening full view would happen here!`, 'info');
+        });
+    });
+
+    // Project card interactions
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        const overlay = card.querySelector('.project-overlay');
+        const links = card.querySelectorAll('.project-link');
+        
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const linkText = link.textContent;
+                const projectTitle = card.querySelector('h3').textContent;
+                showNotification(`${linkText} for "${projectTitle}" would open here!`, 'info');
+            });
+        });
+    });
+
+    // Skills animation on scroll
+    const skillTags = document.querySelectorAll('.skill-tag');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0) scale(1)';
+            }
+        });
+    }, { threshold: 0.5 });
+
+    skillTags.forEach((tag, index) => {
+        tag.style.opacity = '0';
+        tag.style.transform = 'translateY(20px) scale(0.8)';
+        tag.style.transition = `opacity 0.4s ease-out ${index * 0.1}s, transform 0.4s ease-out ${index * 0.1}s`;
+        skillObserver.observe(tag);
+    });
+
+    // Add tilt effect to portfolio cards
+    const cards = document.querySelectorAll('.project-card, .edit-card, .hero-card, .profile-card');
     
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -252,8 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
             
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
         });
@@ -262,22 +314,38 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
         });
     });
+
+    // Parallax effect for design items
+    const designItemsParallax = document.querySelectorAll('.design-item');
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        designItemsParallax.forEach((item, index) => {
+            const rate = scrolled * -0.5 * (index % 2 === 0 ? 1 : -1);
+            item.style.transform = `translateY(${rate * 0.1}px)`;
+        });
+    });
 });
 
-// Typing effect for hero title
+// Typing effect for hero title with portfolio focus
 document.addEventListener('DOMContentLoaded', () => {
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
-        const text = heroTitle.textContent;
-        heroTitle.textContent = '';
-        heroTitle.style.borderRight = '2px solid #6366f1';
+        const text = heroTitle.innerHTML; // Use innerHTML to preserve the span
+        heroTitle.innerHTML = '';
+        heroTitle.style.borderRight = '2px solid #ff6b6b';
         
+        // Extract text content for typing, but preserve HTML structure
+        const textContent = heroTitle.textContent || text.replace(/<[^>]*>/g, '');
+        let displayText = '';
         let i = 0;
+        
         const typeWriter = () => {
             if (i < text.length) {
-                heroTitle.textContent += text.charAt(i);
+                // Add character by character, preserving HTML tags
+                displayText = text.substring(0, i + 1);
+                heroTitle.innerHTML = displayText;
                 i++;
-                setTimeout(typeWriter, 50);
+                setTimeout(typeWriter, 30);
             } else {
                 // Remove cursor after typing is complete
                 setTimeout(() => {
@@ -287,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         // Start typing effect after a short delay
-        setTimeout(typeWriter, 500);
+        setTimeout(typeWriter, 800);
     }
 });
 
@@ -311,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         .scroll-progress-bar {
             height: 100%;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
             width: 0%;
             transition: width 0.1s ease-out;
         }
