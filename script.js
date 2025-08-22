@@ -80,7 +80,7 @@ if (contactForm) {
         
         // Simulate API call
         setTimeout(() => {
-            showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
+            showNotification('Thanks for the message, I will get back to you soon!', 'success');
             contactForm.reset();
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
